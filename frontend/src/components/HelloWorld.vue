@@ -29,12 +29,14 @@
         <td>Sum of the operation</td>
         <td>Remained balance after transaction</td>
         <td>Date when the transaction occurred</td>
+        <td>Operation type</td>
       </tr>
       <tr v-for="trans of transactionHistory">
         <td>{{trans.user.name}}</td>
         <td>{{trans.operationSum}}</td>
         <td>{{trans.remainedBalance}}</td>
         <td>{{ trans.transactionDate.substring(0, 19).replace('T', ' ') }}</td>
+        <td>{{trans.operationType}}</td>
       </tr>
     </table>
 
