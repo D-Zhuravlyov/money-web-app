@@ -8,6 +8,7 @@ import com.money.account.demo.repository.UserRepository;
 import com.money.account.demo.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,6 +26,7 @@ public class DefaultAccountService implements AccountService {
     private UserRepository userRepository;
 
     @Override
+    @ReadOnlyProperty
     public List<MoneyTransaction> getTransactionsHistoryByUserId(long userId) throws UserNotFoundException {
         User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("Unknown id: " +userId ));
 
