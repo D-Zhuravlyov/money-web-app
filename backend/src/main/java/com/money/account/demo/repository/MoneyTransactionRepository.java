@@ -9,13 +9,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 @Repository
 public interface MoneyTransactionRepository extends JpaRepository<MoneyTransaction, Long> {
 
     @ReadOnlyProperty
     @Query("select t from MoneyTransaction t where t.user = :user")
-    List<MoneyTransaction> findByUserReturnStream(@Param("user") User user);
+    List<MoneyTransaction> findMoneyTransactionByUser(@Param("user") User user);
 
 }

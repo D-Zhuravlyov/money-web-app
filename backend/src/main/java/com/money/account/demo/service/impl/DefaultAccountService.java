@@ -32,7 +32,7 @@ public class DefaultAccountService implements AccountService {
 
         LOG.debug("Found user: " +userId +";  " + user.getName());
 
-        return moneyTransactionRepository.findByUserReturnStream(user);
+        return moneyTransactionRepository.findMoneyTransactionByUser(user);
     }
 
 }
