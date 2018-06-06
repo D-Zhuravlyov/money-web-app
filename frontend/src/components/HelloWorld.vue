@@ -131,7 +131,7 @@
   }
 
   label {
-    padding: 12px 20px;
+    padding: 12px 0px;
     margin: 8px 0;
   }
 
