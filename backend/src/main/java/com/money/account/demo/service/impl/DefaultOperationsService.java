@@ -32,7 +32,7 @@ public class DefaultOperationsService implements OperationsService {
 
     @Transactional
     public void performMoneyOperationByUserId(final String userId, final BigDecimal amount, OperationType operationType)
-            throws Throwable {
+            throws UserNotFoundException {
         final User user = userRepository.findById(Long.valueOf(userId))
                 .orElseThrow(() -> new UserNotFoundException("Unknown id: " + userId));
 

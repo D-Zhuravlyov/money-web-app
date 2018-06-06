@@ -26,7 +26,7 @@ public class DefaultAccountService implements AccountService {
     private UserRepository userRepository;
 
     @Override
-    public List<MoneyTransaction> getTransactionsHistoryByUserId(String userId) throws Throwable {
+    public List<MoneyTransaction> getTransactionsHistoryByUserId(String userId) throws UserNotFoundException {
         User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(() -> new UserNotFoundException("Unknown id: " +userId ));
 
         LOG.debug("Found user: " +userId +";  " + user.getName());
