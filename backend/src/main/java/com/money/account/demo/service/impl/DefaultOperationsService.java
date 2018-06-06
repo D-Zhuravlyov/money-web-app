@@ -33,7 +33,7 @@ public class DefaultOperationsService implements OperationsService {
     private MoneyTransactionRepository moneyTransactionRepository;
 
     @Transactional
-    public void addMoneyToUserByUserId(final String userId, final BigDecimal amount) throws UserNotFoundException {
+    public MoneyTransaction addMoneyToUserByUserId(final String userId, final BigDecimal amount) throws UserNotFoundException {
         final User user = userRepository.findById(Long.valueOf(userId))
                 .orElseThrow(() -> new UserNotFoundException("Unknown id: " + userId));
 
@@ -50,13 +50,11 @@ public class DefaultOperationsService implements OperationsService {
 
         final MoneyTransaction currentTransaction = new MoneyTransaction(new Date(), newBalance, amount, ADD,
                 user);
-
-        moneyTransactionRepository.saveAndFlush(currentTransaction);
-        LOG.debug("New transaction flushed.");
+        return moneyTransactionRepository.saveAndFlush(currentTransaction);
     }
 
     @Transactional
-    public void withdrawMoneyFromUserByUserId(final String userId, final BigDecimal amount)
+    public MoneyTransaction withdrawMoneyFromUserByUserId(final String userId, final BigDecimal amount)
             throws UserNotFoundException, WithdrawOperationException {
         final User user = userRepository.findById(Long.valueOf(userId))
                 .orElseThrow(() -> new UserNotFoundException("Unknown id: " + userId));
@@ -75,8 +73,7 @@ public class DefaultOperationsService implements OperationsService {
         final MoneyTransaction currentTransaction = new MoneyTransaction(new Date(), newBalance, amount, WITHDRAW,
                 user);
 
-        moneyTransactionRepository.save(currentTransaction);
-        LOG.debug("New transaction flushed.");
+        return moneyTransactionRepository.save(currentTransaction);
     }
 
     private Sort sortByDate() {
