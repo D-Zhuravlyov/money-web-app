@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface AccountService {
 
-    List<MoneyTransaction> getTransactionsHistoryByUserId(String userId) throws UserNotFoundException;
+    List<MoneyTransaction> getTransactionsHistoryByUserId(long userId) throws UserNotFoundException;
 
 }

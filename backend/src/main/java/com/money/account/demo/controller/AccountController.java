@@ -18,7 +18,7 @@ public class AccountController {
     private AccountService accountService;
 
     @GetMapping("/history")
-    public List<MoneyTransaction> showHistory(@PathVariable String userId) throws Throwable {
+    public List<MoneyTransaction> showHistory(@PathVariable long userId) throws Throwable {
         return accountService.getTransactionsHistoryByUserId(userId);
     }
 
