@@ -1,5 +1,7 @@
 package com.money.account.demo.controller;
 
+import com.money.account.demo.exception.custom.UserNotFoundException;
+import com.money.account.demo.exception.custom.WithdrawOperationException;
 import com.money.account.demo.service.OperationsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,13 +24,13 @@ public class OperationsController {
 
     @PostMapping("/withdraw")
     public ResponseEntity withdrawMoneyFromUser(@RequestParam String userId, @RequestParam BigDecimal amount)
-            throws Throwable {
+            throws UserNotFoundException, WithdrawOperationException {
         operationsService.withdrawMoneyFromUserByUserId(userId, amount);
         return ResponseEntity.ok().body("Operation succeeded");
     }
 
     @PostMapping("/add")
-    public ResponseEntity addMoneyToUser(@RequestParam String userId, @RequestParam BigDecimal amount) throws Throwable {
+    public ResponseEntity addMoneyToUser(@RequestParam String userId, @RequestParam BigDecimal amount) throws UserNotFoundException {
         operationsService.addMoneyToUserByUserId(userId, amount);
         return ResponseEntity.ok().body("Operation succeeded");
     }

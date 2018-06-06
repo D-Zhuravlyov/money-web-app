@@ -1,5 +1,6 @@
 package com.money.account.demo.controller;
 
+import com.money.account.demo.exception.custom.UserNotFoundException;
 import com.money.account.demo.model.MoneyTransaction;
 import com.money.account.demo.service.AccountService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class AccountController {
     private AccountService accountService;
 
     @GetMapping("/history")
-    public List<MoneyTransaction> showHistory(@PathVariable long userId) throws Throwable {
+    public List<MoneyTransaction> showHistory(@PathVariable long userId) throws UserNotFoundException {
         return accountService.getTransactionsHistoryByUserId(userId);
     }
 

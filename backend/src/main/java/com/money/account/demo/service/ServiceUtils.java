@@ -15,7 +15,7 @@ public final class ServiceUtils {
     }
 
     public static BigDecimal calculateNewBalance(MoneyTransaction lastTransaction, BigDecimal amount,
-            OperationType operationType) {
+            OperationType operationType) throws WithdrawOperationException {
         if (operationType.equals(ADD)) {
             if (lastTransaction != null) {
                 final BigDecimal balance = lastTransaction.getRemainedBalance().setScale(2, ROUND_HALF_UP);

@@ -1,6 +1,7 @@
 package com.money.account.demo.service.impl;
 
 import com.money.account.demo.exception.custom.UserNotFoundException;
+import com.money.account.demo.exception.custom.WithdrawOperationException;
 import com.money.account.demo.model.MoneyTransaction;
 import com.money.account.demo.model.User;
 import com.money.account.demo.repository.MoneyTransactionRepository;
@@ -56,7 +57,7 @@ public class DefaultOperationsService implements OperationsService {
 
     @Transactional
     public void withdrawMoneyFromUserByUserId(final String userId, final BigDecimal amount)
-            throws UserNotFoundException {
+            throws UserNotFoundException, WithdrawOperationException {
         final User user = userRepository.findById(Long.valueOf(userId))
                 .orElseThrow(() -> new UserNotFoundException("Unknown id: " + userId));
 
