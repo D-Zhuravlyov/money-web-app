@@ -23,7 +23,7 @@ public class User {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
-    @Column(name = "id", length = 6, nullable = false)
+    @Column(name = "id", nullable = false)
     private long userId;
 
     @NotNull(message = "{email_blank_error_essage}")

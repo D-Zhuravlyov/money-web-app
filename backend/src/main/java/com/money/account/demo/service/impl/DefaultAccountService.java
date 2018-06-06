@@ -8,11 +8,11 @@ import com.money.account.demo.repository.UserRepository;
 import com.money.account.demo.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class DefaultAccountService implements AccountService {
@@ -26,8 +26,9 @@ public class DefaultAccountService implements AccountService {
     private UserRepository userRepository;
 
     @Override
-    public List<MoneyTransaction> getTransactionsHistoryByUserId(String userId) throws Throwable {
-        User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(() -> new UserNotFoundException("Unknown id: " +userId ));
+    @ReadOnlyProperty
+    public List<MoneyTransaction> getTransactionsHistoryByUserId(long userId) throws UserNotFoundException {
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("Unknown id: " +userId ));
 
         LOG.debug("Found user: " +userId +";  " + user.getName());
 
