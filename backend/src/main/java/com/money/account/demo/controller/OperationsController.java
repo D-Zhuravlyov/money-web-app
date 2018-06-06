@@ -23,13 +23,13 @@ public class OperationsController {
     @PostMapping("/withdraw")
     public ResponseEntity withdrawMoneyFromUser(@RequestParam String userId, @RequestParam BigDecimal amount)
             throws Throwable {
-        operationsService.performMoneyOperationByUserId(userId, amount, WITHDRAW);
+        operationsService.withdrawMoneyFromUserByUserId(userId, amount);
         return ResponseEntity.ok().body("Operation succeeded");
     }
 
     @PostMapping("/add")
     public ResponseEntity addMoneyToUser(@RequestParam String userId, @RequestParam BigDecimal amount) throws Throwable {
-        operationsService.performMoneyOperationByUserId(userId, amount, ADD);
+        operationsService.addMoneyToUserByUserId(userId, amount);
         return ResponseEntity.ok().body("Operation succeeded");
     }
 
